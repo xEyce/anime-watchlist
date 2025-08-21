@@ -92,6 +92,29 @@ class AnimeController extends Controller
         ->with('success', 'Top 100 anime for this genre updated!');
 }
 
+    // View Details of selected anime
+    public function viewDetails($id)
+    {
+        // Fetch anime details from Jikan API by MAL ID
+        $response = Http::get("https://api.jikan.moe/v4/anime/{$id}");
+
+        if ($response->failed()) {
+            abort(404, "Anime not found");
+        }
+
+        $anime = $response->json('data'); // The anime details
+
+        return view('anime.view', ['anime' => $anime]);
+    }
+
+    // List all anime added to watchlist
+    public function watchlist()
+    {
+        $animes = Anime::paginate(10);
+
+        return view('anime.watchlist', ['animes' => $animes]);
+    }
+
     public function addToWatchlist(Request $request)
     {
         // First check if the anime already exists in database
@@ -123,12 +146,7 @@ class AnimeController extends Controller
 
     }
 
-    public function watchlist()
-    {
-        $animes = Anime::paginate(10);
-
-        return view('anime.watchlist', ['animes' => $animes]);
-    }
+    
 
 
 }
