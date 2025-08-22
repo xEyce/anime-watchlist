@@ -5,7 +5,7 @@
   <img src="{{ $anime['images']['jpg']['image_url'] ?? '' }}" alt="">
   <div class="">
       <p class="font-extrabold">{{ $anime['title'] }}</p>
-      <p class="">4 popular types of cards in UI design.</p>
+      <p class="">{{ $anime['score'] }}</p>
       <form action="{{ route('anime.add') }}" method="POST">
             @csrf
             <input type="hidden" name="mal_id" value="{{ $anime['mal_id'] }}">
