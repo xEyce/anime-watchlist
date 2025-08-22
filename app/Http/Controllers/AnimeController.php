@@ -39,20 +39,34 @@ class AnimeController extends Controller
 
         // Pass the array to a Blade view
         return view('index', [
-            'animes' => $allAnimes
+            'animes' => $allAnimes,
+            'genreName' => ''
         ]);
 
         
     }
 
 
-    public function fetchTopByGenre($genreId)
-{
-    // Clear old anime data first
-    Anime::truncate();
+    public function fetchTopByGenre(Request $request)
+    {
+    $genreId = $request->input('genre');
 
-    $totalPages = 4; // 25 * 4 = 100
+    if (!$genreId) {
+        return redirect()->route('index')
+            ->with('error', 'Please select a genre.');
+    }
+
+    $genreNames = [
+        1 => "Action",
+        22 => "Romance",
+        24 => "Sci-fi"
+    ];
+
+    $genreName = $genreNames[$genreId] ?? '';
+
+    $totalPages = 2; // 25 * 4 = 100
     $perPage = 25;
+    $allAnimes = [];
 
     for ($page = 1; $page <= $totalPages; $page++) {
         $response = Http::get('https://api.jikan.moe/v4/anime', [
@@ -67,30 +81,20 @@ class AnimeController extends Controller
 
         if (!isset($json['data'])) {
             Log::error('Jikan API error', $json);
-            return redirect()->route('animes.index')
+            return redirect()->route('index')
                 ->with('error', 'Failed to fetch anime from Jikan API.');
         }
 
-        foreach ($json['data'] as $animeData) {
-            Anime::updateOrCreate(
-                ['mal_id' => $animeData['mal_id']], // Unique column
-                [
-                    'title' => $animeData['title'],
-                    'synopsis' => $animeData['synopsis'] ?? '',
-                    'image_url' => $animeData['images']['jpg']['image_url'] ?? null,
-                    'type' => $animeData['type'] ?? null,
-                    'episodes' => $animeData['episodes'] ?? null,
-                    'score' => $animeData['score'] ?? null,
-                ]
-            );
-        }
+        $allAnimes = array_merge($allAnimes, $json['data']);
 
         sleep(1); // prevent API rate limiting
     }
 
-    return redirect()->route('animes.index')
-        ->with('success', 'Top 100 anime for this genre updated!');
-}
+    return view('index', [
+            'animes' => $allAnimes,
+            'genreName' => $genreName
+        ]);
+    }
 
     // View Details of selected anime
     public function viewDetails($id)
@@ -107,14 +111,7 @@ class AnimeController extends Controller
         return view('anime.view', ['anime' => $anime]);
     }
 
-    // List all anime added to watchlist
-    public function watchlist()
-    {
-        $animes = Anime::paginate(10);
-
-        return view('anime.watchlist', ['animes' => $animes]);
-    }
-
+    // Add the selected anime to anime table
     public function addToWatchlist(Request $request)
     {
         // First check if the anime already exists in database

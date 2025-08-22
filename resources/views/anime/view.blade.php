@@ -4,4 +4,9 @@
     <p>{{ $anime['synopsis'] }}</p>
     <p>Episodes: {{ $anime['episodes'] }}</p>
     <p>Score: {{ $anime['score'] }}</p>
+    <p><strong>Genres:</strong>
+        @foreach ($anime['genres'] as $genre)
+                {{ $genre['name'] }}
+        @endforeach
+    </p>
 </x-layout>

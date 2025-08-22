@@ -23,12 +23,8 @@
         <nav>
             <h1><a href="{{ route('index') }}">ANILIST</a></h1>
             
-            
-            
-            <a href="" class="btn">Login</a>
-            <a href="" class="btn">Register</a>
-        
-
+            <a href="{{ route('show.login') }}" class="btn">Login</a>
+            <a href="{{ route('show.register') }}" class="btn">Register</a>
         
             <span class="border-r-2 pr-2">
                 Hi, there. EYCE

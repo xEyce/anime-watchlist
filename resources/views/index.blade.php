@@ -1,34 +1,37 @@
 <x-layout>
-    <h2>Top Anime</h2>
+    
+    <div class="flex">
+        <h2>Top {{ $genreName }}Anime</h2>
+        <form action="{{ route('genres.action') }}" method="POST">
+            @csrf
+            <div class="flex gap-2">
+                <label>
+                    <input type="radio" name="genre" value="1">
+                    Action
+                </label>
 
-    @foreach($animes as $anime)
-        <div class="card">
-            <img src="{{ $anime['images']['jpg']['image_url'] ?? '' }}" alt="">
-            <h2>Title: {{ $anime['title'] }}</h2>
+                <label>
+                    <input type="radio" name="genre" value="22">
+                    Romance
+                </label>
 
-            <form action="{{ route('anime.add') }}" method="POST">
-                @csrf
-                <input type="hidden" name="mal_id" value="{{ $anime['mal_id'] }}">
-                <input type="hidden" name="title" value="{{ $anime['title'] }}">
-                <input type="hidden" name="image_url" value="{{ $anime['images']['jpg']['image_url'] ?? '' }}">
-                <input type="hidden" name="score" value="{{ $anime['score'] }}">
-                <input type="hidden" name="synopsis" value="{{ $anime['synopsis'] ?? '' }}">
-                <input type="hidden" name="episodes" value="{{ $anime['episodes'] }}">
-                <input type="hidden" name="type" value="{{ $anime['type'] }}">
+                <label>
+                    <input type="radio" name="genre" value="24">
+                    Sci-fi
+                </label>
 
-                <button type="submit" 
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 
-                           focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5">
-                    Add
+                <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">
+                    Submit
                 </button>
-            </form>
+            </div>
+        </form>
+    </div>
+    
 
-            <a href="{{ route('anime.view', $anime['mal_id']) }}" 
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 
-                    focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 inline-block">
-            View Details
-            </a>
-        </div>
-    @endforeach
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        @foreach($animes as $anime)
+            <x-card :anime="$anime" />
+        @endforeach
+    </div>
 
 </x-layout>
