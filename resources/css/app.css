@@ -23,20 +23,3 @@ header {
     @apply mr-auto;
   }
 }
-
-input, textarea, select {
-  @apply bg-white;
-}
-
-/* form elements */
-form {
-  @apply max-w-screen-sm;
-}
-input, select, textarea {
-  @apply block w-full mt-2 mb-4 p-2;
-}
-
-/* custom classes */
-.container {
-  @apply max-w-screen-lg mx-auto px-12 py-8;
-}

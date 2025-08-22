@@ -1,37 +1,29 @@
 <x-layout>
-    
-    <div class="flex">
-        <h2>Top {{ $genreName }}Anime</h2>
-        <form action="{{ route('genres.action') }}" method="POST">
+    <div class="mb-6 flex items-center justify-between">
+        <h2 class="text-xl font-bold text-gray-700">
+            Top {{ $genreName }} Anime
+        </h2>
+        <form action="{{ route('genres.action') }}" method="POST" class="flex gap-4 items-center">
             @csrf
-            <div class="flex gap-2">
-                <label>
-                    <input type="radio" name="genre" value="1">
-                    Action
-                </label>
-
-                <label>
-                    <input type="radio" name="genre" value="22">
-                    Romance
-                </label>
-
-                <label>
-                    <input type="radio" name="genre" value="24">
-                    Sci-fi
-                </label>
-
-                <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">
-                    Submit
-                </button>
-            </div>
+            <label class="flex items-center gap-2">
+                <input type="radio" name="genre" value="1" class="text-indigo-500"> Action
+            </label>
+            <label class="flex items-center gap-2">
+                <input type="radio" name="genre" value="22" class="text-indigo-500"> Romance
+            </label>
+            <label class="flex items-center gap-2">
+                <input type="radio" name="genre" value="24" class="text-indigo-500"> Sci-fi
+            </label>
+            <button type="submit" 
+                class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition">
+                Filter
+            </button>
         </form>
     </div>
-    
 
-   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @foreach($animes as $anime)
             <x-card :anime="$anime" />
         @endforeach
     </div>
-
 </x-layout>

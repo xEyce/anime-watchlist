@@ -47,7 +47,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $request->session()->regenerate();
 
-            return redirect()->route('eyce.index')->with('success', "{$user->name} has logged in!");;
+            return redirect()->route('index')->with('success', "{$user->name} has logged in!");;
         }
 
         throw ValidationException::withMessages([
@@ -55,9 +55,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
-    {
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
+        return redirect()->route('show.login');
     }
 
 }

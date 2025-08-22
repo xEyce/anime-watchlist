@@ -1,12 +1,16 @@
+<div class="bg-white shadow-md rounded-lg overflow-hidden w-64">
+  <!-- Full Image Display -->
+  <img 
+    src="{{ $anime['images']['jpg']['image_url'] ?? '' }}" 
+    alt="{{ $anime['title'] }}" 
+    class="w-full h-96 object-cover bg-gray-100"
+  >
 
-<!-- From Uiverse.io by Javierrocadev --> 
-<div class="w-60 h-120 bg-neutral-800 rounded-3xl text-neutral-300 p-4 flex flex-col items-start justify-center gap-3 hover:bg-gray-900 hover:shadow-2xl hover:shadow-sky-400 transition-shadow">
-  
-  <img src="{{ $anime['images']['jpg']['image_url'] ?? '' }}" alt="">
-  <div class="">
-      <p class="font-extrabold">{{ $anime['title'] }}</p>
-      <p class="">{{ $anime['score'] }}</p>
-      <form action="{{ route('anime.add') }}" method="POST">
+  <div class="p-4">
+      <p class="text-lg font-bold truncate">{{ $anime['title'] }}</p>
+      <p class="text-sm text-gray-500 mb-2">⭐ {{ $anime['score'] }}</p>
+
+      <form action="{{ route('anime.add') }}" method="POST" class="flex gap-2">
             @csrf
             <input type="hidden" name="mal_id" value="{{ $anime['mal_id'] }}">
             <input type="hidden" name="title" value="{{ $anime['title'] }}">
@@ -16,18 +20,14 @@
             <input type="hidden" name="episodes" value="{{ $anime['episodes'] }}">
             <input type="hidden" name="type" value="{{ $anime['type'] }}">
 
-            <div>
-              <button type="submit" class="bg-sky-700 font-extrabold p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors">
-                Add
-              </button>
-              <a href="{{ route('anime.view', $anime['mal_id']) }}" class="bg-sky-700 font-extrabold p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors">
-                More
-              </a>
-            </div>
-            
-        </form>
-
-  
+            <button type="submit" 
+              class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">
+              Add
+            </button>
+            <a href="{{ route('anime.view', $anime['mal_id']) }}" 
+              class="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">
+              More
+            </a>
+      </form>
   </div>
-  
 </div>
