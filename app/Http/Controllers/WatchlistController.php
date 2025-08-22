@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WatchlistController extends Controller
 {
@@ -11,7 +12,9 @@ class WatchlistController extends Controller
     // List all the anime in watchlist table
     public function watchlist()
     {
-        $watchlist = Watchlist::paginate(10);
+        $watchlist = Watchlist::with('anime')
+            ->where('user_id', Auth::id())
+            ->get();
 
         return view('anime.watchlist', ['watchlist' => $watchlist]);
     }

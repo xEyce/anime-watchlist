@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Watchlist extends Model
 {
-    /** @use HasFactory<\Database\Factories\WatchlistFactory> */
     use HasFactory;
 
-    protected $fillable = [
-        'anime_id'
-    ];
+    protected $fillable = ['user_id', 'anime_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function anime()
     {

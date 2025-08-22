@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Anime;
 use App\Models\Watchlist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -114,9 +115,11 @@ class AnimeController extends Controller
     // Add the selected anime to anime table
     public function addToWatchlist(Request $request)
     {
-        // First check if the anime already exists in database
+        $user = Auth::user();
+
+        // Save anime in anime table if not exists
         $anime = Anime::firstOrCreate(
-            ['mal_id' => $request->mal_id], // unique identifier
+            ['mal_id' => $request->mal_id],
             [
                 "title" => $request->title,
                 "image_url" => $request->image_url,
@@ -127,16 +130,21 @@ class AnimeController extends Controller
             ]
         );
 
-        // Now save to watchlist (if not already there)
-        $exists = Watchlist::where('anime_id', $anime->id)->exists();
+        // Save to this user's watchlist only
+        $exists = Watchlist::where('user_id', $user->id)
+                        ->where('anime_id', $anime->id)
+                        ->exists();
+
         if (!$exists) {
             Watchlist::create([
+                'user_id' => $user->id,
                 'anime_id' => $anime->id,
             ]);
         }
 
-        return redirect()->back()->with("success", "Anime added to watchlist");
+        return redirect()->back()->with("success", "Anime added to your watchlist");
     }
+
 
     public function removeToWatchlist()
     {
