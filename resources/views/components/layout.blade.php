@@ -9,16 +9,28 @@
 
     {{-- Flash Messages --}}
     @if(session('success'))
-        <div class="p-4 text-center bg-green-100 text-green-700 font-semibold shadow-md">
+        <div id="flash-message" class="p-4 text-center bg-green-100 text-green-700 font-semibold shadow-md">
             {{ session('success') }}
         </div>
     @endif
 
     @if(session('error'))
-        <div class="p-4 text-center bg-red-100 text-red-700 font-semibold shadow-md">
+        <div id="flash-message" class="p-4 text-center bg-red-100 text-red-700 font-semibold shadow-md">
             {{ session('error') }}
         </div>
     @endif
+    <script>
+        setTimeout(() => {
+            const flash = document.getElementById('flash-message');
+            if (flash) {
+                flash.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                flash.style.opacity = "0";
+                flash.style.transform = "translateY(-20px)";
+
+                setTimeout(() => flash.remove(), 500);
+            }
+        }, 3000);
+    </script>
 
     {{-- Navbar --}}
     <header class="bg-white shadow-md">

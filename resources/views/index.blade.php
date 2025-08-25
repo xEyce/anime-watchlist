@@ -3,7 +3,7 @@
         <h2 class="text-xl font-bold text-gray-700">
             Top {{ $genreName }} Anime
         </h2>
-        <form action="{{ route('genres.action') }}" method="POST" class="flex gap-4 items-center">
+        <form action="{{ route('anime.filter' ) }}" method="POST" class="flex gap-4 items-center">
             @csrf
             <label class="flex items-center gap-2">
                 <input type="radio" name="genre" value="1" class="text-indigo-500"> Action
@@ -21,7 +21,7 @@
         </form>
     </div>
 
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="max-w-6xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @foreach($animes as $anime)
             <x-card :anime="$anime" />
         @endforeach

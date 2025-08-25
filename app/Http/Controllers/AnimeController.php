@@ -51,6 +51,7 @@ class AnimeController extends Controller
     public function fetchTopByGenre(Request $request)
     {
     $genreId = $request->input('genre');
+    $request->session()->put('selected_genre', $genreId);
 
     if (!$genreId) {
         return redirect()->route('index')
@@ -140,15 +141,20 @@ class AnimeController extends Controller
                 'user_id' => $user->id,
                 'anime_id' => $anime->id,
             ]);
+        } else{
+            return redirect()->back()->with("error", "Already in your watchlist");
         }
 
         return redirect()->back()->with("success", "Anime added to your watchlist");
     }
 
 
-    public function removeToWatchlist()
+    public function removeToWatchlist($id)
     {
+        $anime = Anime::findOrFail($id);
+        $anime->delete();
 
+        return redirect()->route('anime.watchlist')->with('success', 'Anime Deleted!');
     }
 
     

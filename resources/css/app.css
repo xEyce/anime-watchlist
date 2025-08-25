@@ -4,22 +4,80 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/* Global */
 body {
-  @apply bg-gray-100 text-gray-700;
-  font-family: "Rubik";
-  
+  @apply bg-gray-900 text-gray-200;
+  font-family: "Rubik", sans-serif;
+  line-height: 1.6;
 }
 
-
-
-/* header */
+/* Navbar */
 header {
-  @apply bg-white;
+  @apply bg-gray-950 shadow-lg border-b border-gray-800;
+}
 
-  nav {
-    @apply flex items-center gap-5 max-w-screen-lg px-12 py-4 mx-auto;
-  }
-  h1 {
-    @apply mr-auto;
-  }
+header nav {
+  @apply flex items-center gap-5 max-w-screen-lg px-12 py-4 mx-auto;
+}
+
+header h1 a {
+  @apply text-indigo-400 font-extrabold text-2xl hover:text-indigo-300 transition;
+}
+
+/* Buttons */
+button,
+a.btn,
+form button {
+  @apply rounded-lg px-4 py-2 text-sm font-medium transition;
+}
+
+button.bg-blue-500,
+.bg-blue-500 {
+  @apply bg-indigo-600 hover:bg-indigo-500 text-white shadow;
+}
+
+button.bg-red-500,
+.bg-red-500 {
+  @apply bg-red-600 hover:bg-red-500 text-white shadow;
+}
+
+button.bg-gray-200,
+.bg-gray-200 {
+  @apply bg-gray-700 hover:bg-gray-600 text-gray-200 shadow;
+}
+
+/* Cards */
+.card,
+.bg-white {
+  @apply bg-gray-800 text-gray-100 rounded-2xl shadow-lg border border-gray-700;
+}
+
+/* Inputs / Forms */
+input,
+select,
+textarea {
+  @apply bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}
+
+/* Flash Messages (Toast style) */
+#flash-message {
+  @apply fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg;
+}
+
+#flash-message.bg-green-100 {
+  @apply bg-green-600 text-white;
+}
+
+#flash-message.bg-red-100 {
+  @apply bg-red-600 text-white;
+}
+
+/* Links */
+a {
+  @apply text-white hover:text-indigo-300 transition;
+}
+
+/* Grid items hover */
+.grid > div {
+  @apply transition transform hover:-translate-y-1 hover:shadow-xl;
 }

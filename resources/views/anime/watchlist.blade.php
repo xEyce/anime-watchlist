@@ -7,20 +7,31 @@
              class="w-full h-96 object-cover bg-gray-100">
 
         <div class="p-4 flex flex-col justify-between">
-            <p class="text-lg font-semibold text-gray-800 mb-3 truncate">{{ $anime->anime->title }}</p>
+            <p class="text-lg font-bold truncate">{{ $anime->anime->title }}</p>
+            <p class="text-sm text-gray-500 mb-2">⭐ {{ $anime->anime['score'] }}</p>
 
             <div class="flex justify-between items-center">
-                <form action="{{ route('anime.add') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition">
-                        Add
-                    </button>
-                </form>
-
                 <a href="{{ route('anime.view', $anime->anime->mal_id) }}" 
-                   class="px-3 py-1 bg-gray-200 text-gray-800 text-sm rounded-lg hover:bg-gray-300 transition">
-                    More
+                   class="px-3 py-2 text-sm rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition">
+                    View More
                 </a>
+                <div class="flex">
+                    <form action="{{ route('anime.add') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="px-3 py-1 text-white text-sm rounded-lg transition">
+                            ➕
+                        </button>
+                    </form>
+
+                    <form action="{{ route('delete', $anime->anime->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button  type="submit" class="px-3 py-1 text-white text-sm rounded-lg transition">
+                            ➖
+                        </button>
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>

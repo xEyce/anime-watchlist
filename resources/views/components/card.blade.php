@@ -1,4 +1,4 @@
-<div class="bg-white shadow-md rounded-lg overflow-hidden w-64">
+<div  class="bg-white rounded-xl shadow hover:shadow-lg transition duration-300 overflow-hidden">
   <!-- Full Image Display -->
   <img 
     src="{{ $anime['images']['jpg']['image_url'] ?? '' }}" 
@@ -20,14 +20,18 @@
             <input type="hidden" name="episodes" value="{{ $anime['episodes'] }}">
             <input type="hidden" name="type" value="{{ $anime['type'] }}">
 
-            <button type="submit" 
-              class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">
-              Add
-            </button>
-            <a href="{{ route('anime.view', $anime['mal_id']) }}" 
-              class="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">
-              More
-            </a>
+            <div class="flex justify-between items-center">
+              <a href="{{ route('anime.view', $anime['mal_id']) }}" 
+                class="px-3 py-2 text-sm rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition">
+                View More
+              </a>
+              <button type="submit" 
+                class="px-3 py-1 text-white text-sm rounded-lg transition">
+                ➕
+              </button>
+              
+            </div>
+            
       </form>
   </div>
 </div>
