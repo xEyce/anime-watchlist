@@ -15,10 +15,13 @@ Built using Laravel Framework that uses Jikan API to fetch the anime list. The h
 
 ## Feautures
 
-1 - Users can register their own account to unlock the watchlist feature of the site.
-2 - It shows the top 100 anime listed in MyAnimeList.
-3 - Users can filter the anime by genre.
-4 - Registered users can create their own watchlist by adding or removing anime/s.
+<ol>
+    <li>Users can register their own account to unlock the watchlist feature of the site.</li>
+    <li>It shows the top 100 anime listed in MyAnimeList.</li>
+    <li>Users can filter the anime by genre.</li>
+    <li>Registered users can create their own watchlist by adding or removing anime/s.</li>
+</ol>
+
 
 ## Tech Stack
 
@@ -26,7 +29,11 @@ Frontend: Blade, TailwindCSS
 Backend: Laravel, Jikan API
 Tools: VS Code, Git
 
-### Premium Partners
+### Screen Shots
+
+HOME PAGE
+
+<img src="">
 
 
 
