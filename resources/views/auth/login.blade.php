@@ -1,18 +1,18 @@
 <x-layout>
-    <div class="max-w-md mx-auto mt-8 bg-white p-6 rounded-xl shadow">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Log In to Your Account</h2>
+    <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow">
+        <h2 class="text-2xl font-bold text-white mb-4 text-center">Log In to Your Account</h2>
 
         <form action="{{ route('login') }}" method="POST" class="space-y-4">
             @csrf
 
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                <label for="email" class="block text-sm font-medium text-white">Email:</label>
                 <input type="email" name="email" required value="{{ old('email') }}"
                        class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-200">
             </div>
 
             <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                <label for="password" class="block text-sm font-medium text-white">Password:</label>
                 <input type="password" name="password" required
                        class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-200">
             </div>
