@@ -6,13 +6,16 @@
         <form action="{{ route('anime.filter' ) }}" method="POST" class="flex gap-4 items-center">
             @csrf
             <label class="flex items-center gap-2">
-                <input type="radio" name="genre" value="1" class="text-indigo-500"> Action
+                <input type="radio" name="genre" value="1" class="text-indigo-500"
+                {{ $genreId == '1' ? 'checked' : '' }}> Action
             </label>
             <label class="flex items-center gap-2">
-                <input type="radio" name="genre" value="22" class="text-indigo-500"> Romance
+                <input type="radio" name="genre" value="22" class="text-indigo-500"
+                {{ $genreId == '22' ? 'checked' : '' }}> Romance
             </label>
             <label class="flex items-center gap-2">
-                <input type="radio" name="genre" value="24" class="text-indigo-500"> Sci-fi
+                <input type="radio" name="genre" value="24" class="text-indigo-500"
+                {{ $genreId == '24' ? 'checked' : '' }}> Sci-fi
             </label>
             <button type="submit" 
                 class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition">

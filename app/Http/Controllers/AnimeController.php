@@ -94,7 +94,8 @@ class AnimeController extends Controller
 
     return view('index', [
             'animes' => $allAnimes,
-            'genreName' => $genreName
+            'genreName' => $genreName,
+            'genreId' => $genreId
         ]);
     }
 
