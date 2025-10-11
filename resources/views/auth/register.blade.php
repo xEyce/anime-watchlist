@@ -1,6 +1,6 @@
 <x-layout>
     <div class="max-w-md mx-auto mt-8 bg-white p-6 rounded-xl shadow">
-        <h2 class="text-2xl font-bold text-white mb-4 text-center">Register</h2>
+        <h2 class="text-2xl font-bold text-white mb-4 text-center">Register your account!</h2>
 
         <form action="{{ route('register') }}" method="POST" class="space-y-4">
             @csrf
